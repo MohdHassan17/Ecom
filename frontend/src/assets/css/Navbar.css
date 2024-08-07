@@ -1,0 +1,58 @@
+header{
+    position: absolute;
+    top:0;
+    left:2.5%;
+    right:2.5%;
+    width: 95%;
+    margin: auto;
+    
+ 
+}
+
+
+
+.nav-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    
+    align-items: center;
+}
+
+.nav-logo-container{
+    flex: 1;
+
+}
+
+.nav-logo{
+    width: 80px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+
+.nav-list{
+    list-style: none;
+  
+
+}
+
+.nav-list-items{
+    float: left;
+    text-transform: uppercase;
+    padding:   10px 12px;
+    
+    font-weight:  bold;
+    margin: 3px;
+    margin-top: 0;
+    transition: .3s ease-out;
+    cursor: pointer;
+    
+
+}
+
+
+.nav-list-items:hover{
+    background-color: aqua;
+    
+}

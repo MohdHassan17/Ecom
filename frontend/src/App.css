@@ -1,0 +1,15 @@
+
+:root{
+    --white: #fff;
+    --primary-color: #232ED1;
+    --text-color: #333333;
+    --font: 'Poppins', sans-serif;
+    --negative-color: #D2042D;
+
+}
+
+body{
+    background-color: #191308;
+    color: #bd966a;
+    font-family: 'Roboto', sans-serif;
+}
