@@ -8,7 +8,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 # Import of Models
-from store.models import Product, ConfirmedOrder
+from store.models import Product, ConfirmedOrder, CartItem
 
 
 
@@ -22,6 +22,51 @@ from .serializers import ConfirmedOrderSerializer
 
 
 # Start of Inventory Management Module
+
+
+# views.py
+from django.utils.timezone import now, timedelta
+from django.db.models import Sum,F
+
+
+
+class DailyDashboardView(APIView):
+
+    def get(self, request, format=None):
+        # Calculate the start and end of the current day
+        today = now().date()
+        start_of_day = today
+        end_of_day = today + timedelta(days=1)
+
+        # Get all orders placed today
+        orders_today = ConfirmedOrder.objects.filter(created_at__range=(start_of_day, end_of_day))
+
+        pending_orders = ConfirmedOrder.objects.filter(pending_status="Pending").count()
+
+        # Total number of orders placed today
+        total_orders = orders_today.count()
+
+        # Get all cart ids linked to these orders
+        cart_ids_today = orders_today.values_list('order_id', flat=True)
+
+        # Total revenue amassed today
+        total_revenue = CartItem.objects.filter(order_id__in=cart_ids_today) \
+                            .aggregate(total_revenue=Sum(F('product__price') * F('quantity')))['total_revenue'] or 0
+
+        # Top 5 selling products
+        top_selling_products = CartItem.objects.filter(order_id__in=cart_ids_today) \
+                                .values('product__name') \
+                                .annotate(total_sold=Sum('quantity')) \
+                                .order_by('-total_sold')[:5]
+
+        data = {
+            'total_orders': total_orders,
+            'total_revenue': total_revenue,
+            'top_selling_products': list(top_selling_products),
+            'pending_orders': pending_orders
+        }
+
+        return Response(data)
 
 @api_view(['POST'])
 def create_product(request): 

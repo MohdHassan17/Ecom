@@ -3,6 +3,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 // Renamed context and provider
 const ProductManagementContext = createContext();
@@ -30,13 +31,17 @@ export const ProductManagementProvider = ({ children }) => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/store/products/");
       setProducts(response.data);
+      console.log(response.data)
+      
     } catch (error) {
       console.error("Error fetching products:", error);
+     
     }
   };
   useEffect(() => {
    
     getProducts();
+    
   }, []);
 
 
@@ -76,10 +81,15 @@ export const ProductManagementProvider = ({ children }) => {
     .then(response => {
       
       console.log(response.data);
+      
+      navigate('/admin/inventory')
+      toast.success('You just added a product')
+      getProducts()
     })
     .catch(error => {
       
       console.error("There was an error!", error);
+      toast.error('The code was correct, your fault as usual...')
     });
 
 
@@ -183,6 +193,7 @@ const editUploadProduct = (url, id) => {
     products: products,
     handleDelete: handleDelete,
     setProductImg: setProductImg,
+    productImg: productImg,
     addProductDetails: addProductDetails,
     setAddProductDetails: setAddProductDetails,
     editProducts: editProducts,

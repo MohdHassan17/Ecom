@@ -1,61 +1,67 @@
 .add-product-form-container{
-    width: 90%;
-    margin: auto;
-    margin-top: 5%;
-}
-
-.add-product-form{
-    width: 90%;
-    margin: auto;
-    display: grid;
-    grid-template-rows:  1fr 1fr;
-    gap: 20px;
-}
-
-.inputs{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-
-
-.input-text{
-    width: 95%;
-    height: 45px;
-    border-radius: 15px;
+    background-color: var(--panel);
+    margin-right:50px;
+    color: var(--white);
     padding: 10px;
-    font-size: .9rem;
-    font-family: var(--font);
-    border: 1.5px solid lightgray;
-    box-shadow: 0 0 5px lightgrey;
     
-    outline: none;
+}
+
+
+.form{
+    padding: 10px;
+}
+
+.input-container{
+    display: block;
+    margin: 10px
+
+}
+
+.input-text,.input-description{
+    margin: 10px;
+    font-family: var(--font);
+    
+
+}
+
+.input-text::placeholder{
+    color: rgb(189, 189, 189);
 }
 
 .input-text:focus{
-    border:  1px solid gray;
+    border: none;
 }
 
+.input-text{
+    border: none;
+    border-radius: 9px;
+    padding-left: 6px;
+    background: var(--background);
+    width: 400px;
+    height: 50px;
+    color: whitesmoke;
+    outline: none;
+}
 
 
 .input-description{
-    font-size: .9rem;
-    font-family: var(--font);
-    border-radius: 15px;
-    border: 1.5px solid lightgray;
-    box-shadow: 0 0 5px lightgrey;
-    resize: none;
+    width: 550px;
+    height: 150px;
+    border-radius: 9px;
     padding: 10px;
+    background: var(--background);
+    border:none;
+    resize: none;
+    outline: none;
+    color: whitesmoke;
 }
 
-.input-description:focus{
-    border: 2px solid gray;
-    
-}
 
+.input-description::placeholder{
+    color: rgb(189, 189, 189);
+}
 
 .submit-btn{
-    width: 200px;
-    border: none;
+    padding: 11px 15px;
+    font-size: 13px;
 }

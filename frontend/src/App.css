@@ -1,15 +1,13 @@
 
 :root{
+    --background: #121526;;
+    --panel: #161b2e;
     --white: #fff;
-    --primary-color: #232ED1;
+    --primary-color: #0451a9;
+    --accent: #88bbbb;
     --text-color: #333333;
     --font: 'Poppins', sans-serif;
     --negative-color: #D2042D;
 
 }
 
-body{
-    background-color: #191308;
-    color: #bd966a;
-    font-family: 'Roboto', sans-serif;
-}

@@ -3,6 +3,7 @@ import '../../../assets/css/admin/ProductModule/ProductList.css'
 import ProductManagementContext from '../../../context/admin/ProductManagementContext'
 import Img from '../../../assets/images/beef.png'
 import { useNavigate } from 'react-router-dom'
+import { MdDelete, MdEdit } from 'react-icons/md'
 
 
 function ProductList() {
@@ -16,7 +17,36 @@ function ProductList() {
   return (
     <div>
 
-      <div className="product-list">
+
+<div className="inventory-table-container">
+  <table className='inventory-table' cellSpacing={0} cellPadding={10}>
+    <thead className='table-header'>
+      <tr className='table-header-row'>
+        <td>Item Code</td>
+        <td>Photo</td>
+        <td>Name</td>
+        <td>Category</td>
+        <td>Available Quantity</td>
+        <td>Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      {products.map((product) => (
+        <tr className='item-row' key={product.id}>
+          <td>{product.unique_id}</td>
+          <td><img src={product.image ? product.image : Img} className='table-img' alt="Product"/></td>
+          <td>{product.name}</td>
+          <td>{product.category}</td>
+          <td>{product.available_quantity}</td>
+          <td className='action-box'><MdEdit className='action'  onClick={() => {viewProductDetails(product.id)}}/> <MdDelete className='action' color='tomato'  onClick={()=>{handleDelete(product.id)}}/></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+
+      {/* <div className="product-list">
       {
             products.map((product)=>(
                 <div className='product-list-card' key={product.id}>
@@ -42,7 +72,7 @@ function ProductList() {
                 </div>
             ))
         }
-      </div>
+      </div> */}
         
 
     </div>
